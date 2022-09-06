@@ -2,6 +2,10 @@ conv3d_transpose
 ================
 
 .. autofunction:: ivy.functional.ivy.layers.conv3d_transpose
+
+.. autofunction:: ivy.container.container_methods.conv3d_transpose
+
+.. autofunction:: ivy.container.container_methods.static_conv3d_transpose
 |
 | **Supported Frameworks:**
 
