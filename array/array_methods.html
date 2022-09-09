@@ -110,6 +110,7 @@
 <li class="toctree-l2"><a class="reference internal" href="array_methods/expm1.html">expm1 array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/floor.html">floor array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/floor_divide.html">floor_divide array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="array_methods/floormod.html">floormod array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/greater.html">greater array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/greater_equal.html">greater_equal array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/isfinite.html">isfinite array</a></li>
@@ -160,6 +161,7 @@
 <li class="toctree-l2"><a class="reference internal" href="array_methods/einops_repeat.html">einops_repeat array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/to_numpy.html">to_numpy array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/to_list.html">to_list array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="array_methods/supports_inplace.html">supports_inplace array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/inplace_decrement.html">inplace_decrement array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/stable_divide.html">stable_divide array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/clip_vector_norm.html">clip_vector_norm array</a></li>
@@ -168,13 +170,11 @@
 <li class="toctree-l2"><a class="reference internal" href="array_methods/assert_supports_inplace.html">assert_supports_inplace array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/copy_array.html">copy_array array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/to_scalar.html">to_scalar array</a></li>
-<li class="toctree-l2"><a class="reference internal" href="array_methods/floormod.html">floormod array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/fourier_encode.html">fourier_encode array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/value_is_nan.html">value_is_nan array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/exists.html">exists array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/default.html">default array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/stable_pow.html">stable_pow array</a></li>
-<li class="toctree-l2"><a class="reference internal" href="array_methods/supports_inplace.html">supports_inplace array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/inplace_update.html">inplace_update array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/inplace_increment.html">inplace_increment array</a></li>
 <li class="toctree-l2"><a class="reference internal" href="array_methods/clip_matrix_norm.html">clip_matrix_norm array</a></li>
@@ -1597,7 +1597,7 @@ with x_min, and those &gt; x_max with x_max.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ivy.array.array_methods.clip_matrix_norm">
-<span class="sig-prename descclassname">ivy.Array.</span></span><span class="sig-name descname"><span class="pre">clip_matrix_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_norm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ivy/array/array_methods.html#clip_matrix_norm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ivy.array.array_methods.clip_matrix_norm" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname">ivy.Array.</span></span><span class="sig-name descname"><span class="pre">clip_matrix_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_norm</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ivy/array/array_methods.html#clip_matrix_norm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ivy.array.array_methods.clip_matrix_norm" title="Permalink to this definition"></a></dt>
 <dd><p>ivy.Array instance method variant of ivy.clip_matrix_norm. This method simply
 wraps the function, and so the docstring for ivy.clip_matrix_norm also applies
 to this method with minimal changes.</p>
@@ -3115,23 +3115,37 @@ applies to this method with minimal changes.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="ivy.array.array_methods.inplace_increment">
 <span class="sig-prename descclassname">ivy.Array.</span></span><span class="sig-name descname"><span class="pre">inplace_increment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ivy/array/array_methods.html#inplace_increment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ivy.array.array_methods.inplace_increment" title="Permalink to this definition"></a></dt>
-<dd><p>ivy.Array instance method variant of ivy.inplace_increment. This method simply
-wraps the function, and so the docstring for ivy.inplace_increment also applies
-to this method with minimal changes.</p>
+<dd><p>ivy.Array instance method variant of ivy.inplace_increment. This
+method wraps the function, and so the docstring for
+ivy.inplace_increment also applies to this method with minimal changes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<a class="reference internal" href="array/Array.html#ivy.array.array.Array" title="ivy.array.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>) – input array to increment</p></li>
-<li><p><strong>val</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<a class="reference internal" href="array/Array.html#ivy.array.array.Array" title="ivy.array.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">NativeArray</span></code>]) – The array to increment the variable with.</p></li>
+<li><p><strong>self</strong> (<a class="reference internal" href="array/Array.html#ivy.array.array.Array" title="ivy.array.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>) – The input array to be incremented by the defined value.</p></li>
+<li><p><strong>val</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<a class="reference internal" href="array/Array.html#ivy.array.array.Array" title="ivy.array.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">NativeArray</span></code>]) – The value of increment.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference internal" href="array/Array.html#ivy.array.array.Array" title="ivy.array.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><em>ret</em> – The array following the in-place increment.</p>
+<dd class="field-odd"><p><em>ret</em> – The array following an in-place increment.</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>With <code class="code docutils literal notranslate"><span class="pre">ivy.Array</span></code> instance methods:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.7</span><span class="p">,</span> <span class="mf">4.3</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">inplace_increment</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">ivy.array([6.7, 5.3, 3.5, 2.9])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="mf">4.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">,</span> <span class="mf">6.</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">inplace_increment</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">ivy.array([6.5, 7.5, 8.5])</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -4118,11 +4132,85 @@ ivy.array(1.)</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="ivy.array.array_methods.mean">
 <span class="sig-prename descclassname">ivy.Array.</span></span><span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keepdims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ivy/array/array_methods.html#mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ivy.array.array_methods.mean" title="Permalink to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="array/Array.html#ivy.array.array.Array" title="ivy.array.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a></p>
+<dd><p>ivy.Array instance method variant of ivy.mean. This method simply
+wraps the function, and so the docstring for ivy.mean also applies
+to this method with minimal changes.</p>
+<p><strong>Special Cases</strong></p>
+<p>Let <code class="docutils literal notranslate"><span class="pre">N</span></code> equal the number of elements over which to compute the
+arithmetic mean.
+-   If <code class="docutils literal notranslate"><span class="pre">N</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code>, the arithmetic mean is <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.
+-   If <code class="docutils literal notranslate"><span class="pre">x_i</span></code> is <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, the arithmetic mean is <code class="docutils literal notranslate"><span class="pre">NaN</span></code> (i.e., <code class="docutils literal notranslate"><span class="pre">NaN</span></code></p>
+<blockquote>
+<div><p>values propagate).</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>self</strong> (<a class="reference internal" href="array/Array.html#ivy.array.array.Array" title="ivy.array.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>) – input array. Should have a floating-point data type.</p></li>
+<li><p><strong>axis</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]]]) – axis or axes along which arithmetic means must be computed. By default, (default: <code class="docutils literal notranslate"><span class="pre">None</span></code>)
+the mean must be computed over the entire array. If a Sequence of
+integers, arithmetic means must be computed over multiple axes.
+Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>keepdims</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – bool, if <code class="docutils literal notranslate"><span class="pre">True</span></code>, the reduced axes (dimensions) must be included in the (default: <code class="docutils literal notranslate"><span class="pre">False</span></code>)
+result as singleton dimensions, and, accordingly, the result must be
+compatible with the input array (see <span class="xref std std-ref">broadcasting</span>). Otherwise,
+if <code class="docutils literal notranslate"><span class="pre">False</span></code>, the reduced axes (dimensions) must not be included in
+the result. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><strong>out</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<a class="reference internal" href="array/Array.html#ivy.array.array.Array" title="ivy.array.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>]) – optional output array, for writing the result to. (default: <code class="docutils literal notranslate"><span class="pre">None</span></code>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="array/Array.html#ivy.array.array.Array" title="ivy.array.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><em>ret</em> – array, if the arithmetic mean was computed over the entire array, a
+zero-dimensional array containing the arithmetic mean; otherwise, a
+non-zero-dimensional array containing the arithmetic means.
+The returned array must have the same data type as <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>With <code class="code docutils literal notranslate"><span class="pre">ivy.Array</span></code> input:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">ivy.array(4.)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">ivy.array(0.)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mf">0.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">ivy.array(1.1)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mf">0.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ivy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">ivy.array(0.)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">ivy.array([-0.25,  1.05,  2.1])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ivy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">ivy.array([1., 4.])</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -5629,15 +5717,22 @@ wraps the function, and so the docstring for ivy.supports_inplace also applies
 to this method with minimal changes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>self</strong> (<a class="reference internal" href="array/Array.html#ivy.array.array.Array" title="ivy.array.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>) – input array</p>
+<dd class="field-odd"><p><strong>self</strong> (<a class="reference internal" href="array/Array.html#ivy.array.array.Array" title="ivy.array.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>) – The input array whose elements’ data type is to be checked.</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><em>ret</em> – Boolean, whether or not inplace operations are supported for x.</p>
+<dd class="field-odd"><p><em>ret</em> – Bool value depends on whether the currently active backend
+framework supports in-place operations with argument’s data type.</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>With <cite>ivy.Array</cite> input and backend set as “tensorflow”:
+&gt;&gt;&gt; x = ivy.array([1., 4.2, 2.2])
+&gt;&gt;&gt; ret = x.supports_inplace()
+&gt;&gt;&gt; print(ret)
+False</p>
 </dd></dl>
 
 <dl class="py function">

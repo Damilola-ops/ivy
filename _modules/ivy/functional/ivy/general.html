@@ -185,7 +185,7 @@
 <span class="kn">import</span> <span class="nn">inspect</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">numbers</span> <span class="kn">import</span> <span class="n">Number</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span>
 <span class="kn">import</span> <span class="nn">einops</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -1336,8 +1336,9 @@
 <span class="k">def</span> <span class="nf">clip_vector_norm</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">],</span>
     <span class="n">max_norm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">p</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="o">/</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
+    <span class="n">p</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
     <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Clips (limits) the vector p-norm of an array.</span>
@@ -1447,15 +1448,19 @@
     <span class="k">return</span> <span class="n">ret</span></div>
 
 
-<span class="n">clip_vector_norm</span><span class="o">.</span><span class="n">unsupported_dtypes</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;torch&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;float16&quot;</span><span class="p">,)}</span>
+<span class="n">clip_vector_norm</span><span class="o">.</span><span class="n">unsupported_dtypes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;torch&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;float16&quot;</span><span class="p">,),</span>
+    <span class="s2">&quot;tensorflow&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;float16&quot;</span><span class="p">,),</span>
+<span class="p">}</span>
 
 
 <div class="viewcode-block" id="clip_matrix_norm"><a class="viewcode-back" href="../../../../functional/ivy/general/clip_matrix_norm.html#ivy.functional.ivy.general.clip_matrix_norm">[docs]</a><span class="nd">@handle_nestable</span>
 <span class="k">def</span> <span class="nf">clip_matrix_norm</span><span class="p">(</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">],</span>
     <span class="n">max_norm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">p</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="o">/</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
+    <span class="n">p</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
     <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Clips (limits) the matrix norm of an array.</span>
@@ -1544,47 +1549,29 @@
 <span class="sd">        b: ivy.array([[0.849, 1.13, 1.41]])</span>
 <span class="sd">    }</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">norms</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">matrix_norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">norms</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">matrix_norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">ratios</span> <span class="o">=</span> <span class="n">ivy</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">ivy</span><span class="o">.</span><span class="n">stable_divide</span><span class="p">(</span><span class="n">max_norm</span><span class="p">,</span> <span class="n">norms</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">ivy</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">ratios</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">)</span></div>
 
 
 <span class="n">clip_matrix_norm</span><span class="o">.</span><span class="n">unsupported_dtypes</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;jax&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;float16&quot;</span><span class="p">,),</span>
-    <span class="s2">&quot;numpy&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;float16&quot;</span><span class="p">,),</span>
-    <span class="s2">&quot;tensorflow&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;float16&quot;</span><span class="p">,),</span>
-    <span class="s2">&quot;torch&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;float16&quot;</span><span class="p">,),</span>
+    <span class="s2">&quot;jax&quot;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bfloat16&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s2">&quot;numpy&quot;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bfloat16&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s2">&quot;tensorflow&quot;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bfloat16&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s2">&quot;torch&quot;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">&quot;float16&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bfloat16&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
 <span class="p">}</span>
-
-
-<div class="viewcode-block" id="floormod"><a class="viewcode-back" href="../../../../functional/ivy/general/floormod.html#ivy.functional.ivy.general.floormod">[docs]</a><span class="nd">@to_native_arrays_and_back</span>
-<span class="nd">@handle_out_argument</span>
-<span class="nd">@handle_nestable</span>
-<span class="k">def</span> <span class="nf">floormod</span><span class="p">(</span>
-    <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">],</span>
-    <span class="n">y</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">],</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Returns element-wise remainder of division.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    x</span>
-<span class="sd">        array, input to floormod</span>
-<span class="sd">    y</span>
-<span class="sd">        array, denominator input for floormod.</span>
-<span class="sd">    out</span>
-<span class="sd">        optional output array, for writing the result to. It must have a shape that the</span>
-<span class="sd">        inputs broadcast to.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    ret</span>
-<span class="sd">        An array of the same shape and type as x, with the elements floor modded.</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">current_backend</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">floormod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="unstack"><a class="viewcode-back" href="../../../../functional/ivy/general/unstack.html#ivy.functional.ivy.general.unstack">[docs]</a><span class="nd">@to_native_arrays_and_back</span>
@@ -2891,25 +2878,67 @@
 
 <div class="viewcode-block" id="supports_inplace"><a class="viewcode-back" href="../../../../functional/ivy/general/supports_inplace.html#ivy.functional.ivy.general.supports_inplace">[docs]</a><span class="nd">@inputs_to_native_arrays</span>
 <span class="nd">@handle_nestable</span>
-<span class="k">def</span> <span class="nf">supports_inplace</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Determine whether inplace operations are supported for the data type of x.</span>
+<span class="k">def</span> <span class="nf">supports_inplace</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Dtype</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">Variable</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines whether in-place operations are supported for x&#39;s data type,</span>
+<span class="sd">    by the current backend framework setting.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    x</span>
-<span class="sd">        Input variable or array to check for inplace support for.</span>
+<span class="sd">        Input variable for whose data type we check whether the current backend</span>
+<span class="sd">        framework supports in-place operations.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    ret</span>
-<span class="sd">        Boolean, whether or not inplace operations are supported for x.</span>
+<span class="sd">        Value depends on whether in-place operations are supported for</span>
+<span class="sd">        data type of x.</span>
 
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If x isn&#39;t a class instance of ivy.Variable, ivy.Array,</span>
+<span class="sd">        or ivy.NativeArray, an exception will be raised.</span>
+
+<span class="sd">    This function is *nestable*, and therefore also accepts :code:&#39;ivy.Container&#39;</span>
+<span class="sd">    instance in place of the argument.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    With :code:&#39;ivy.DType(&quot;bool&quot;)&#39; input:</span>
+<span class="sd">    &gt;&gt;&gt; x = True</span>
+<span class="sd">    &gt;&gt;&gt; ivy.supports_inplace(x)</span>
+<span class="sd">    ValueError: Input x must be either a variable or an array.</span>
+
+<span class="sd">    With :code:&#39;ivy.Array&#39; input and default backend set as &#39;numpy&#39;:</span>
+<span class="sd">    &gt;&gt;&gt; x = ivy.array([0, 1, 2])</span>
+<span class="sd">    &gt;&gt;&gt; ret = ivy.supports_inplace(x)</span>
+<span class="sd">    &gt;&gt;&gt; print(ret)</span>
+<span class="sd">    True</span>
+
+<span class="sd">    With :code:&#39;ivy.Variable&#39; input and backend set as &#39;jax&#39;:</span>
+<span class="sd">    &gt;&gt;&gt; x = ivy.variable(ivy.array(5.5))</span>
+<span class="sd">    &gt;&gt;&gt; ret = ivy.supports_inplace(x)</span>
+<span class="sd">    &gt;&gt;&gt; print(ret)</span>
+<span class="sd">    False</span>
+
+<span class="sd">    With :code:&#39;ivy.Container&#39; input and backend set as &#39;torch&#39;:</span>
+<span class="sd">    &gt;&gt;&gt; x = ivy.Container(a=ivy.array([5., 6.]), b=ivy.array([7., 8.]))</span>
+<span class="sd">    &gt;&gt;&gt; ret = ivy.supports_inplace(x)</span>
+<span class="sd">    &gt;&gt;&gt; print(ret)</span>
+<span class="sd">    {</span>
+<span class="sd">        a: true,</span>
+<span class="sd">        b: true</span>
+<span class="sd">    }</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">ivy</span><span class="o">.</span><span class="n">is_variable</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">ivy</span><span class="o">.</span><span class="n">inplace_variables_supported</span><span class="p">()</span>
     <span class="k">elif</span> <span class="n">ivy</span><span class="o">.</span><span class="n">is_native_array</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">ivy</span><span class="o">.</span><span class="n">inplace_arrays_supported</span><span class="p">()</span>
-    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Input x must be either a variable or an array.&quot;</span><span class="p">)</span></div>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input x must be either a variable or an array.&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="assert_supports_inplace"><a class="viewcode-back" href="../../../../functional/ivy/general/assert_supports_inplace.html#ivy.functional.ivy.general.assert_supports_inplace">[docs]</a><span class="nd">@inputs_to_native_arrays</span>
@@ -3780,6 +3809,7 @@
 <span class="k">def</span> <span class="nf">one_hot</span><span class="p">(</span>
     <span class="n">indices</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">],</span>
     <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="o">/</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">device</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Device</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeDevice</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">out</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -4156,6 +4186,60 @@
         <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">unsupported_devices_dtype</span></div>
+
+
+<div class="viewcode-block" id="vmap"><a class="viewcode-back" href="../../../../functional/ivy/general/vmap.html#ivy.functional.ivy.general.vmap">[docs]</a><span class="k">def</span> <span class="nf">vmap</span><span class="p">(</span>
+    <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+    <span class="n">in_axes</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">Sequence</span><span class="p">[</span><span class="kc">None</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">out_axes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Vectorizing map. Creates a function which maps func over argument axes.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func</span>
+<span class="sd">        Function to be mapped over additional axes.</span>
+<span class="sd">    in_axes</span>
+<span class="sd">       An integer, None, or (nested) standard Python container</span>
+<span class="sd">       (tuple/list) thereof specifying which input array</span>
+<span class="sd">       axes to map over.If each positional argument to fun</span>
+<span class="sd">       is an array, then in_axes can be an integer, a None,</span>
+<span class="sd">       or a tuple of integers and Nones with length equal</span>
+<span class="sd">       to the number of positional arguments to fun. An</span>
+<span class="sd">       integer or None indicates which array axis to map</span>
+<span class="sd">       over for all arguments (with None indicating not to map any axis),</span>
+<span class="sd">       and a tuple indicates which axis to map for each</span>
+<span class="sd">       corresponding positional argument. Axis integers must</span>
+<span class="sd">       be in the range [-ndim, ndim) for each array,</span>
+<span class="sd">       where ndim is the number of dimensions (axes) of the</span>
+<span class="sd">       corresponding input array.</span>
+<span class="sd">    out_axes</span>
+<span class="sd">        An integer indicating where the mapped axis should appear in the output.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ret</span>
+<span class="sd">        Batched/vectorized version of func with arguments</span>
+<span class="sd">        that correspond to those of func, but with extra</span>
+<span class="sd">        array axes at positions indicated by in_axes,</span>
+<span class="sd">        and a return value that corresponds</span>
+<span class="sd">        to that of fun, but with extra array axes</span>
+<span class="sd">        at positions indicated by out_axes.</span>
+<span class="sd">    This docstring is a summarised version of the</span>
+<span class="sd">    `docstring &lt;https://jax.readthedocs.io/en/latest/_autosummary/jax.vmap.html#jax-vmap&gt;`_ for  </span>
+<span class="sd">    vmap from JAX documentation.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    With :code:`ivy.matmul` func and :code:`ivy.Array` input:</span>
+<span class="sd">    &gt;&gt;&gt; x = ivy.array(ivy.arange(60).reshape((3, 5, 4)))</span>
+<span class="sd">    &gt;&gt;&gt; y = ivy.array(ivy.arange(40).reshape((5, 4, 2)))</span>
+<span class="sd">    &gt;&gt;&gt; z = ivy.vmap(ivy.matmul, (1, 0), 1)(x, y)</span>
+<span class="sd">    &gt;&gt;&gt; print(z.shape)</span>
+<span class="sd">    (3, 5, 2)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: optimize in the numpy and tensorflow backends and extend functionality</span>
+    <span class="k">return</span> <span class="n">current_backend</span><span class="p">()</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">in_axes</span><span class="p">,</span> <span class="n">out_axes</span><span class="p">)</span></div>
 </pre></div>
 
            </div>
