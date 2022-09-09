@@ -28,5 +28,4 @@ Manipulation
    manipulation/swapaxes.rst
    manipulation/tile.rst
    manipulation/zero_pad.rst
-   manipulation/chunk.rst
 
