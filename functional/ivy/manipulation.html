@@ -135,6 +135,7 @@
 <li class="toctree-l2"><a class="reference internal" href="manipulation/swapaxes.html">swapaxes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manipulation/tile.html">tile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manipulation/zero_pad.html">zero_pad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manipulation/chunk.html">chunk</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="meta.html">Meta</a></li>
@@ -197,6 +198,39 @@
              
   <section id="module-ivy.functional.ivy.manipulation">
 <span id="manipulation"></span><h1>Manipulation<a class="headerlink" href="#module-ivy.functional.ivy.manipulation" title="Permalink to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="ivy.functional.ivy.manipulation.chunk">
+<span class="sig-prename descclassname">ivy.</span></span><span class="sig-name descname"><span class="pre">chunk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ivy/functional/ivy/manipulation.html#chunk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ivy.functional.ivy.manipulation.chunk" title="Permalink to this definition"></a></dt>
+<dd><p>Splits an array into the specified number of chunks
+:type x: <code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<a class="reference internal" href="../../array/array/Array.html#ivy.array.array.Array" title="ivy.array.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">NativeArray</span></code>]
+:param x: Input array to chunk
+:type chunks: <code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]
+:param chunks: The number of chunks to return (default: <code class="docutils literal notranslate"><span class="pre">None</span></code>)
+:type axis: <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
+:param axis: Dimension along which to split the tensor , default is 0 (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="../../array/array/Array.html#ivy.array.array.Array" title="ivy.array.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>ret</em> – A List of sub-arrays</p></li>
+<li><p><em>Functional Examples</em></p></li>
+<li><p><em>———-</em></p></li>
+<li><p><strong>With</strong> (<em>code: ‘ivy.Array’ input:</em>)</p></li>
+<li><p><em>&gt;&gt;&gt; x = ivy.NativeArray([1,2,3,4,5,6,7,8,9])</em></p></li>
+<li><p><em>&gt;&gt;&gt; y = ivy.chunk(x,3)</em></p></li>
+<li><p><em>&gt;&gt;&gt; print(y)</em></p></li>
+<li><p><em>ivy.Array([[1,2,3],[4,5,6],[7,8,9]])</em></p></li>
+<li><p><em>Both the description and the type hints above assumes an array input for simplicity,</em></p></li>
+<li><p>but this function is <em>nestable</em>, and therefore also accepts <code class="code docutils literal notranslate"><span class="pre">ivy.Container</span></code></p></li>
+<li><p><em>instances in place of any of the arguments.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="ivy.functional.ivy.manipulation.clip">
 <span class="sig-prename descclassname">ivy.</span></span><span class="sig-name descname"><span class="pre">clip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_max</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ivy/functional/ivy/manipulation.html#clip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ivy.functional.ivy.manipulation.clip" title="Permalink to this definition"></a></dt>

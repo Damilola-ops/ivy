@@ -1505,6 +1505,46 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">current_backend</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">zero_pad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pad_width</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="chunk"><a class="viewcode-back" href="../../../../functional/ivy/manipulation/chunk.html#ivy.functional.ivy.manipulation.chunk">[docs]</a><span class="nd">@to_native_arrays_and_back</span>
+<span class="nd">@handle_nestable</span>
+<span class="k">def</span> <span class="nf">chunk</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span><span class="n">ivy</span><span class="o">.</span><span class="n">NativeArray</span><span class="p">],</span>
+    <span class="o">/</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">chunks</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">axis</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span>    
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ivy</span><span class="o">.</span><span class="n">Array</span><span class="p">]</span> <span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Splits an array into the specified number of chunks </span>
+<span class="sd">    Parameters </span>
+<span class="sd">    ----------</span>
+<span class="sd">    x</span>
+<span class="sd">        Input array to chunk </span>
+<span class="sd">    chunks </span>
+<span class="sd">        The number of chunks to return </span>
+<span class="sd">    axis </span>
+<span class="sd">        Dimension along which to split the tensor , default is 0 </span>
+<span class="sd">    </span>
+<span class="sd">    Returns </span>
+<span class="sd">    ----------</span>
+<span class="sd">    ret </span>
+<span class="sd">        A List of sub-arrays </span>
+<span class="sd">    </span>
+<span class="sd">    Functional Examples :</span>
+<span class="sd">    ----------</span>
+<span class="sd">    With :code: &#39;ivy.Array&#39; input:</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; x = ivy.NativeArray([1,2,3,4,5,6,7,8,9])</span>
+<span class="sd">    &gt;&gt;&gt; y = ivy.chunk(x,3)</span>
+<span class="sd">    &gt;&gt;&gt; print(y)</span>
+<span class="sd">    ivy.Array([[1,2,3],[4,5,6],[7,8,9]])</span>
+<span class="sd">    </span>
+<span class="sd">    Both the description and the type hints above assumes an array input for simplicity,</span>
+<span class="sd">    but this function is *nestable*, and therefore also accepts :code:`ivy.Container`</span>
+<span class="sd">    instances in place of any of the arguments.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">current_backend</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span></div>
 </pre></div>
 
            </div>
